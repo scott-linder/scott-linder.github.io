@@ -5,8 +5,8 @@ description: "Homepage of Scott Linder"
 baseurl: ""
 url: "http://scottlinder.com"
 navs:
-    - name: Home
-      url: /index.html
+    - name: About
+      url: /about/
     - name: Blog
       url: /blog/
 
