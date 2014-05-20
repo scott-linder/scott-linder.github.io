@@ -4,6 +4,11 @@ email: scott@scottlinder.com
 description: "Homepage of Scott Linder"
 baseurl: ""
 url: "http://scottlinder.com"
+navs:
+    - name: Home
+      url: /index.html
+    - name: Blog
+      url: /blog/
 
 markdown: kramdown
 permalinks: pretty

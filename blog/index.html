@@ -5,6 +5,7 @@ permalink: /blog/
 ---
 
 <div id="blog">
+    <p>Subscribe via <a href="{{ "/feed.xml" | prepend: site.baseurl }}">RSS</a></p>
     <ul class="posts">
     {% for post in site.posts %}
         <li><span class="post-date">{{ post.date | date_to_string }}</span>

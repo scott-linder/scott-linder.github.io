@@ -2,9 +2,9 @@
     <h1 id="title"><a href="{{ site.basurl }}/">{{ site.name }}</a></h1>
     <div class="navbar pure-menu pure-menu-open pure-menu-horizontal">
         <ul>
-        {% for nav_page in site.pages %}
-            <li{% if page.url contains nav_page.url %} class="pure-menu-selected"{% endif %}>
-            <a href="{{ nav_page.url | prepend: site.baseurl }}">{{ nav_page.title }}</a>
+        {% for nav in site.navs %}
+            <li{%if page.url contains nav.url %} class="pure-menu-selected"{% endif %}>
+                <a href="{{ nav.url | prepend: site.baseurl }}">{{ nav.name }}</a>
             </li>
         {% endfor %}
         </ul>
