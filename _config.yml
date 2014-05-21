@@ -3,7 +3,7 @@ title: Scott Linder
 email: scott@scottlinder.com
 description: "Homepage of Scott Linder"
 baseurl: ""
-url: "http://scottlinder.com"
+url: "http://www.scottlinder.com/"
 navs:
     - name: About
       url: /about/
