@@ -14,4 +14,4 @@ the webmaster for the WMU [Computer Club](http://ccowmu.org/) and work as a
 system administrator at the [CAE Center](http://www.wmich.edu/engineer/cae/).
 
 If you want to get a hold of me, shoot me an
-[email](mailto:scott.linder18@gmail.com).
+[email](mailto:{{ site.email }}).
