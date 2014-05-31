@@ -135,3 +135,19 @@ ul.list-horizontal li:last-of-type::after {
 .posts .post-date::after {
     content: " ⇀ ";
 }
+
+@media print {
+    #header,
+    #footer {
+        display: none;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        text-shadow: none;
+    }
+
+    pre {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+}
