@@ -15,10 +15,6 @@ html, button, input, select, textarea,
     font-size: 18px;
 }
 
-body {
-    line-height: 1.8em;
-}
-
 code {
     border: 1px solid #999;
     background-color: #1B1D1E;
@@ -55,6 +51,10 @@ a           { color: #2277CC; }
 a:hover     { color: #CC2277; }
 a:visited   { color: #7722CC; }
 
+p {
+    line-height: 1.8em;
+}
+
 #content,
 #footer {
     margin: 1em auto;
@@ -68,7 +68,7 @@ a:visited   { color: #7722CC; }
 
 #title {
     font-size: 3em;
-    padding: 0.3em;
+    padding: 0;
     text-shadow: black 2px 2px;
 }
 
