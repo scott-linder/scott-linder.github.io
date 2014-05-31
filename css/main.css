@@ -25,6 +25,8 @@ pre {
     font-family: 'Droid Sans Mono', monospace !important;
     border: 1px solid #999;
     padding: 0.5em;
+    white-space: pre;
+    overflow: auto;
 }
 
 pre code {
