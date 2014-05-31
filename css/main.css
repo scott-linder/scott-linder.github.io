@@ -51,7 +51,8 @@ a           { color: #2277CC; }
 a:hover     { color: #CC2277; }
 a:visited   { color: #7722CC; }
 
-p {
+p,
+li {
     line-height: 1.8em;
 }
 
