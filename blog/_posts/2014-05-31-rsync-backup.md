@@ -1,5 +1,6 @@
 ---
 layout: post
+categories: cclub
 ---
 
 You should run backups. The more backups the better. The more frequent the
