@@ -71,14 +71,6 @@ li {
     text-shadow: black 2px 2px;
 }
 
-#title::before {
-    content: "« ";
-}
-
-#title::after {
-    content: " »";
-}
-
 #title > a {
     color: inherit;
 }
@@ -131,6 +123,17 @@ ul.list-horizontal li:last-of-type::after {
 .posts .post-date::after {
     content: " ⇀ ";
 }
+
+@media (min-width: 800px) {
+    #title::before {
+        content: "« ";
+    }
+
+    #title::after {
+        content: " »";
+    }
+}
+
 
 @media print {
     #header,
