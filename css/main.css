@@ -23,10 +23,13 @@ pre {
     padding: 0.5em;
     white-space: pre;
     overflow: auto;
+    background-color: #1B1D1E;
 }
 
 pre code {
     border: none;
+    padding: 0;
+    background-color: inherit;
 }
 
 blockquote {
