@@ -5,6 +5,8 @@ title: About
 
 I'm interested in computers: hardware, software, administration, *etc.*
 
+You can find my resumé [here](/resume.pdf).
+
 I've been known to [write code](http://www.github.com/scott-linder/).
 
 I use [Linux](https://www.archlinux.org/), Windows, and Mac OS X everyday.
