@@ -5,10 +5,22 @@ description: "Homepage of Scott Linder"
 baseurl: ""
 url: "http://www.scottlinder.com/"
 navs:
-    - name: About
-      url: /about/
-    - name: Blog
-      url: /blog/
-
+  - name: About
+    url: /about/
+  - name: Blog
+    url: /blog/
 markdown: kramdown
+kramdown:
+  math_engine: mathjax
+  input: GFM
+  hard_wrap: false
 permalinks: pretty
+lsi: false
+safe: true
+incremental: false
+highlighter: rouge
+gist:
+  noscript: false
+gems:
+  - jekyll-coffeescript
+  - jekyll-paginate
