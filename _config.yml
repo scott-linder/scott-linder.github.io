@@ -7,6 +7,8 @@ url: "http://www.scottlinder.com/"
 navs:
   - name: About
     url: /about/
+  - name: Talks
+    url: /talks/
   - name: Blog
     url: /blog/
 markdown: kramdown
