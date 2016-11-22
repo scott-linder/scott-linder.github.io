@@ -4,13 +4,25 @@ email: scott@scottlinder.com
 description: "Homepage of Scott Linder"
 baseurl: ""
 url: "http://www.scottlinder.com/"
+github:
+  name: github.com/scott-linder
+  url: https://github.com/scott-linder/
 navs:
   - name: About
     url: /about/
   - name: Talks
     url: /talks/
+  - name: Code
+    url: /code/
   - name: Blog
     url: /blog/
+code:
+  - name: Irsh
+    url: /irsh/
+  - name: RustPN
+    url: /rustpn/
+  - name: db
+    url: /db/
 markdown: kramdown
 kramdown:
   math_engine: mathjax

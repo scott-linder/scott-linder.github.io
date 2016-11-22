@@ -1,0 +1,16 @@
+---
+layout: default
+---
+<div class="navbar pure-menu pure-menu-open pure-menu-horizontal">
+    <ul>
+    {% for nav in site.code %}
+        <li{%if page.url contains nav.url %} class="pure-menu-selected"{% endif %}>
+            <a href="{{ nav.url | prepend: "/code" | prepend: site.baseurl }}">{{ nav.name }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+<div id="content">
+    <h1>{{ page.title }}</h1>
+    {{ content }}
+</div>

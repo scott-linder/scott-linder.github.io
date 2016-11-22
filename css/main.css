@@ -153,3 +153,7 @@ ul.list-horizontal li:last-of-type::after {
         word-wrap: break-word;
     }
 }
+
+.navbar {
+    text-align: center
+}
