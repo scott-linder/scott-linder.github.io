@@ -35,6 +35,6 @@ incremental: false
 highlighter: rouge
 gist:
   noscript: false
-gems:
+plugins:
   - jekyll-coffeescript
   - jekyll-paginate
