@@ -6,7 +6,7 @@ baseurl: ""
 url: "http://www.scottlinder.com/"
 github:
   name: github.com/scott-linder
-  url: https://github.com/scott-linder/
+  loc: https://github.com/scott-linder/
 navs:
   - name: About
     url: /about/
