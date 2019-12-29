@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Talks on Scott Linder</title>
+    <link>https://www.scottlinder.com/talk/</link>
+    <description>Recent content in Talks on Scott Linder</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 12 Feb 2015 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.scottlinder.com/talk/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Git for the Uninitiated</title>
+      <link>https://www.scottlinder.com/talk/2015-02-12-git-for-the-uninitiated/</link>
+      <pubDate>Thu, 12 Feb 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.scottlinder.com/talk/2015-02-12-git-for-the-uninitiated/</guid>
+      <description>A second talk covering the Git distributed version control system that I gave to the Computer Club of Western Michigan University in February 2015.
+  Slide deck is available on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>Rust</title>
+      <link>https://www.scottlinder.com/talk/2014-10-16-rust/</link>
+      <pubDate>Thu, 16 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.scottlinder.com/talk/2014-10-16-rust/</guid>
+      <description>A talk on the Rust programming language I gave to the Computer Club of Western Michigan University in October 2014.
+  </description>
+    </item>
+    
+    <item>
+      <title>Git or: How I Learned to Stop Worrying and Love the Code</title>
+      <link>https://www.scottlinder.com/talk/2014-10-02-git/</link>
+      <pubDate>Thu, 02 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.scottlinder.com/talk/2014-10-02-git/</guid>
+      <description>A talk I gave about the Git distributed version control system to the Computer Club at Western Michigan University in October 2014. Also a shallow reference to a great film.
+  </description>
+    </item>
+    
+  </channel>
+</rss>

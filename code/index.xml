@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Code on Scott Linder</title>
+    <link>https://www.scottlinder.com/code/</link>
+    <description>Recent content in Code on Scott Linder</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://www.scottlinder.com/code/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>db</title>
+      <link>https://www.scottlinder.com/code/db/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.scottlinder.com/code/db/</guid>
+      <description>A simple x86_64 debugger written with ptrace and Udis86
+Rationale This was an exercise in learning ptrace for an assignment that lead to a curiosity about how modern debuggers trace code.
+Features db supports single-stepping through assembly, disassembling single instructions, reading and writing arbitrary registers, and reading and writing arbitrary memory locations. It also supports intercepting and squashing signals before they reach the traced process.</description>
+    </item>
+    
+    <item>
+      <title>irsh</title>
+      <link>https://www.scottlinder.com/code/irsh/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.scottlinder.com/code/irsh/</guid>
+      <description>Internet Relay SHell
+Rationale Both IRC and Unix shells share a line-oriented, text-based interface. Many IRC bots follow the pattern of invoking commands and passing arguments, but do not allow for composition of commands. The Unix shell (through pipes and redirection) makes composition of commands and filters simple.
+Thus irsh hopes to achieve the same, but in the restricted context of an IRC channel, and with the reuse of as many Unix utilities as possible (with only slight interface modifications).</description>
+    </item>
+    
+    <item>
+      <title>rustpn</title>
+      <link>https://www.scottlinder.com/code/rustpn/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.scottlinder.com/code/rustpn/</guid>
+      <description>RustPN is a stack-based scripting language designed to extend Rust programs with runtime programmability.
+Overview All execution in RustPN shares one common data stack. It contains typed data, referred to as &amp;ldquo;items&amp;rdquo;. Item types include integers (of variable precision, decided at the creation of the interpreter), 64-bit IEEE floating point numbers, utf-8 encoded strings, booleans, symbols (think of ruby atoms, but prefixed with &amp;lsquo;:&#39;), and blocks. A block is an anonymous function body, which can contain item literals and calls to functions.</description>
+    </item>
+    
+  </channel>
+</rss>

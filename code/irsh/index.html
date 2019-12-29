@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en-us"><head>
+    <link rel="stylesheet" href="/normalize.css">
+    <link rel="stylesheet" href="/main.css">
+    <title>irsh - Scott Linder</title>
+    </head>
+<body>
+        
+        <div id="header">
+            <div class="c"><ul id="breadcrumb"><li><a href="/">~</a></li><li><a href="https://www.scottlinder.com/code/">Code</a></li></ul><ul id="navbar">
+    
+    <li><a href="https://www.scottlinder.com/post/">Posts</a></li>
+    
+    <li><a href="https://www.scottlinder.com/talk/">Talks</a></li>
+    
+    <li><a href="https://www.scottlinder.com/code/">Code</a></li>
+    
+</ul>
+</div>
+        </div>
+        
+        <div id="content" class="c">
+<h1>irsh</h1>
+<p>Internet Relay SHell</p>
+<h2 id="rationale">Rationale</h2>
+<p>Both IRC and Unix shells share a line-oriented, text-based interface. Many IRC
+bots follow the pattern of invoking commands and passing arguments, but do not
+allow for composition of commands. The Unix shell (through pipes and
+redirection) makes composition of commands and filters simple.</p>
+<p>Thus irsh hopes to achieve the same, but in the restricted context of an IRC
+channel, and with the reuse of as many Unix utilities as possible (with only
+slight interface modifications).</p>
+<h2 id="overview">Overview</h2>
+<p>The bot's core is written in Python3 and requires no non-standard
+libraries.</p>
+<p>The rest of the bot is intended to be written in Unix shell, specifically
+<a href="http://fishshell.com/">fish</a>, and in general the core commands require
+only core utilities.</p>
+<h2 id="use">Use</h2>
+<p>The bot identifies commands with a prefix (typically <code>$</code>), and then
+uses the <code>shlex</code> python module to tokenize the input. The rest works
+as you expect from any Unix shell, with piping, and output redirection
+(to simplify permissions only append is allowed).</p>
+<p>Filenames are restricted to alphanumeric characters, and IRC channels are used
+as &ldquo;directories&rdquo; (with the channel where the command originated being
+considered the current working directory), allowing for each channel to have
+its own namespace, while still allowing use of files across channels through
+absolute pathnames.</p>
+<p>For example, in a network with two channels, <code>#one</code> and <code>#two</code>,
+if we append to a file in <code>#one</code>:</p>
+<pre><code>&lt;stringy&gt; $echo this is in #one &gt;&gt; one
+&lt;stringy&gt; $cat one
+   &lt;fish&gt; this is in #one
+</code></pre><p>And then we want to access it from <code>#two</code>:</p>
+<pre><code>&lt;stringy&gt; $cat one
+   &lt;fish&gt; cat: var/root/#two/one: No such file or directory
+&lt;stringy&gt; $cat /#one/one
+   &lt;fish&gt; this is in #one
+</code></pre><p>We can simply use an absolute path.</p>
+<p>You will also notice that the error message fish gave for a missing file
+includes <code>var/root</code>, which is where fish stores files, relative to where it is
+started. The most important component in the resolution of filenames is the
+script <code>lib/path</code> which takes the context of the pathname (i.e. the current
+channel) and crafts a real path to the actual file in <code>var/root</code>. This prevents
+users from escaping the <code>var/root</code> &ldquo;chroot&rdquo;.</p>
+
+
+        </div><div id="footer" class="c">
+    <ul>
+        <li>Scott Linder</li>
+        <li>Programmer</li>
+        <li><a href="mailto:scott@scottlinder.com">scott@scottlinder.com</a></li>
+        <li><a href="https://github.com/scott-linder/">github.com/scott-linder</a></li>
+    </ul>
+    <ul>
+        <li>Built: 2019-12-29 at 5:54pm (EST)</li>
+    </ul>
+</div>
+</body>
+</html>

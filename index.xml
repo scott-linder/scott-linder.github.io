@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Home on Scott Linder</title>
+    <link>https://www.scottlinder.com/</link>
+    <description>Recent content in Home on Scott Linder</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 21 Sep 2015 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.scottlinder.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>CSAW 2015 Sharpturn</title>
+      <link>https://www.scottlinder.com/post/2015-09-21-csaw-2015-sharpturn/</link>
+      <pubDate>Mon, 21 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.scottlinder.com/post/2015-09-21-csaw-2015-sharpturn/</guid>
+      <description>The 400 point Forensics problem in the 2015 CSAW CTF looked lonely with only 4 solves. It was named sharpturn and the description was &amp;ldquo;I think my SATA controller is dying.&amp;rdquo;
+Taking a look around I downloaded and unpacked the archive, which contained a single sharpturn directory. I changed into the directory, and immediately noticed it was a bare git repo (it is obvious from the contents, but my shell prompt also parses git status if it determines I&#39;m in a repo).</description>
+    </item>
+    
+    <item>
+      <title>Git for the Uninitiated</title>
+      <link>https://www.scottlinder.com/talk/2015-02-12-git-for-the-uninitiated/</link>
+      <pubDate>Thu, 12 Feb 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.scottlinder.com/talk/2015-02-12-git-for-the-uninitiated/</guid>
+      <description>A second talk covering the Git distributed version control system that I gave to the Computer Club of Western Michigan University in February 2015.
+  Slide deck is available on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>Vim, Rust, and Uzbl</title>
+      <link>https://www.scottlinder.com/post/2014-11-15-vim-rust-and-uzbl/</link>
+      <pubDate>Sat, 15 Nov 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.scottlinder.com/post/2014-11-15-vim-rust-and-uzbl/</guid>
+      <description>Vim has a convenient feature called keywordprg which allows you to easily access documentation for the keyword currently under the cursor. This is typically set to man, meaning you can typically only get documentation for shell scripts, system calls and the C standard libraries.
+Rust, however, has wonderful documentation for their standard library as well as a few other crates shipped along with it.
+To marry these two seems like a great idea, and I must admit that someone beat me to the punch there, but I still don&#39;t find this solution complete for most common browsers (e.</description>
+    </item>
+    
+    <item>
+      <title>Rust</title>
+      <link>https://www.scottlinder.com/talk/2014-10-16-rust/</link>
+      <pubDate>Thu, 16 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.scottlinder.com/talk/2014-10-16-rust/</guid>
+      <description>A talk on the Rust programming language I gave to the Computer Club of Western Michigan University in October 2014.
+  </description>
+    </item>
+    
+    <item>
+      <title>Git or: How I Learned to Stop Worrying and Love the Code</title>
+      <link>https://www.scottlinder.com/talk/2014-10-02-git/</link>
+      <pubDate>Thu, 02 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.scottlinder.com/talk/2014-10-02-git/</guid>
+      <description>A talk I gave about the Git distributed version control system to the Computer Club at Western Michigan University in October 2014. Also a shallow reference to a great film.
+  </description>
+    </item>
+    
+    <item>
+      <title>The Problem with Icon Fonts</title>
+      <link>https://www.scottlinder.com/post/2014-08-02-problem-with-icon-fonts/</link>
+      <pubDate>Sat, 02 Aug 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.scottlinder.com/post/2014-08-02-problem-with-icon-fonts/</guid>
+      <description>The Good Everyone loves icon fonts like Font Awesome. What&#39;s not to love? You can scale, color, shadow, etc. your icons right in CSS, all without sacrificing a bit of browser compatibility.
+The Bad With all these great benefits, why would there be a problem?
+The issue lies in semantics: the code points which icon fonts use are meaningless. The regions used are defined as Private Use Areas by the Unicode Consortium.</description>
+    </item>
+    
+    <item>
+      <title>Rsync Backup</title>
+      <link>https://www.scottlinder.com/post/2014-05-31-rsync-backup/</link>
+      <pubDate>Sat, 31 May 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.scottlinder.com/post/2014-05-31-rsync-backup/</guid>
+      <description>You should run backups. The more backups the better. The more frequent the better. The more isolated the better.
+The Setup With just $150 and some spare desk space you can set up a backup server. Here&#39;s an example setup:
+ Raspberry Pi ($40) Powered USB 2.0 Hub ($10) SATA to USB 2.0 Adapter ($8) Any SATA HDD ($80)  The Backup If you want a simple backup, you can just run an rsync one-liner:</description>
+    </item>
+    
+    <item>
+      <title>db</title>
+      <link>https://www.scottlinder.com/code/db/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.scottlinder.com/code/db/</guid>
+      <description>A simple x86_64 debugger written with ptrace and Udis86
+Rationale This was an exercise in learning ptrace for an assignment that lead to a curiosity about how modern debuggers trace code.
+Features db supports single-stepping through assembly, disassembling single instructions, reading and writing arbitrary registers, and reading and writing arbitrary memory locations. It also supports intercepting and squashing signals before they reach the traced process.</description>
+    </item>
+    
+    <item>
+      <title>irsh</title>
+      <link>https://www.scottlinder.com/code/irsh/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.scottlinder.com/code/irsh/</guid>
+      <description>Internet Relay SHell
+Rationale Both IRC and Unix shells share a line-oriented, text-based interface. Many IRC bots follow the pattern of invoking commands and passing arguments, but do not allow for composition of commands. The Unix shell (through pipes and redirection) makes composition of commands and filters simple.
+Thus irsh hopes to achieve the same, but in the restricted context of an IRC channel, and with the reuse of as many Unix utilities as possible (with only slight interface modifications).</description>
+    </item>
+    
+    <item>
+      <title>rustpn</title>
+      <link>https://www.scottlinder.com/code/rustpn/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.scottlinder.com/code/rustpn/</guid>
+      <description>RustPN is a stack-based scripting language designed to extend Rust programs with runtime programmability.
+Overview All execution in RustPN shares one common data stack. It contains typed data, referred to as &amp;ldquo;items&amp;rdquo;. Item types include integers (of variable precision, decided at the creation of the interpreter), 64-bit IEEE floating point numbers, utf-8 encoded strings, booleans, symbols (think of ruby atoms, but prefixed with &amp;lsquo;:&#39;), and blocks. A block is an anonymous function body, which can contain item literals and calls to functions.</description>
+    </item>
+    
+  </channel>
+</rss>

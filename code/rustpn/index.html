@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en-us"><head>
+    <link rel="stylesheet" href="/normalize.css">
+    <link rel="stylesheet" href="/main.css">
+    <title>rustpn - Scott Linder</title>
+    </head>
+<body>
+        
+        <div id="header">
+            <div class="c"><ul id="breadcrumb"><li><a href="/">~</a></li><li><a href="https://www.scottlinder.com/code/">Code</a></li></ul><ul id="navbar">
+    
+    <li><a href="https://www.scottlinder.com/post/">Posts</a></li>
+    
+    <li><a href="https://www.scottlinder.com/talk/">Talks</a></li>
+    
+    <li><a href="https://www.scottlinder.com/code/">Code</a></li>
+    
+</ul>
+</div>
+        </div>
+        
+        <div id="content" class="c">
+<h1>rustpn</h1>
+<p>RustPN is a stack-based scripting language designed to extend Rust programs
+with runtime programmability.</p>
+<h2 id="overview">Overview</h2>
+<p>All execution in RustPN shares one common data stack. It contains typed data,
+referred to as &ldquo;items&rdquo;. Item types include integers (of variable precision,
+decided at the creation of the interpreter), 64-bit IEEE floating point
+numbers, utf-8 encoded strings, booleans, symbols (think of ruby atoms, but
+prefixed with &lsquo;:'), and blocks. A block is an anonymous function body, which
+can contain item literals and calls to functions.</p>
+<p>Whenever an item is evaluated that is not a function call, the value
+is pushed onto the data stack. Whenever a function call is encountered,
+control is immediately transferred to either the native code implementing
+that function, or the RustPN block defining it.</p>
+<p>Comments are delimited by parenthesis and do not nest.</p>
+<h2 id="example">Example</h2>
+<p>Here is an example of an iterative Fibonacci function written in RustPN:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-forth" data-lang="forth"><span style="color:#a6e22e">:fib</span> <span style="color:#75715e">( n -- n&#39; )</span> <span style="color:#a6e22e">{</span>
+    <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">rot
+</span><span style="color:#66d9ef"></span>    <span style="color:#a6e22e">{</span>
+        <span style="color:#66d9ef">over
+</span><span style="color:#66d9ef"></span>        <span style="color:#66d9ef">+
+</span><span style="color:#66d9ef"></span>        <span style="color:#66d9ef">swap
+</span><span style="color:#66d9ef"></span>    <span style="color:#a6e22e">}</span> <span style="color:#a6e22e">times</span>
+    <span style="color:#a6e22e">pop</span>
+<span style="color:#a6e22e">}</span> <span style="color:#a6e22e">fn</span>
+
+<span style="color:#ae81ff">1000</span> <span style="color:#a6e22e">fib</span>
+</code></pre></div>
+
+        </div><div id="footer" class="c">
+    <ul>
+        <li>Scott Linder</li>
+        <li>Programmer</li>
+        <li><a href="mailto:scott@scottlinder.com">scott@scottlinder.com</a></li>
+        <li><a href="https://github.com/scott-linder/">github.com/scott-linder</a></li>
+    </ul>
+    <ul>
+        <li>Built: 2019-12-29 at 5:54pm (EST)</li>
+    </ul>
+</div>
+</body>
+</html>

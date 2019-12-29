@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://www.scottlinder.com/post/2015-09-21-csaw-2015-sharpturn/</loc>
+    <lastmod>2015-09-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.scottlinder.com/</loc>
+    <lastmod>2015-09-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.scottlinder.com/post/</loc>
+    <lastmod>2015-09-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.scottlinder.com/talk/2015-02-12-git-for-the-uninitiated/</loc>
+    <lastmod>2015-02-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.scottlinder.com/talk/</loc>
+    <lastmod>2015-02-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.scottlinder.com/post/2014-11-15-vim-rust-and-uzbl/</loc>
+    <lastmod>2014-11-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.scottlinder.com/talk/2014-10-16-rust/</loc>
+    <lastmod>2014-10-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.scottlinder.com/talk/2014-10-02-git/</loc>
+    <lastmod>2014-10-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.scottlinder.com/post/2014-08-02-problem-with-icon-fonts/</loc>
+    <lastmod>2014-08-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.scottlinder.com/post/2014-05-31-rsync-backup/</loc>
+    <lastmod>2014-05-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.scottlinder.com/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>https://www.scottlinder.com/code/</loc>
+  </url>
+  
+  <url>
+    <loc>https://www.scottlinder.com/code/db/</loc>
+  </url>
+  
+  <url>
+    <loc>https://www.scottlinder.com/code/irsh/</loc>
+  </url>
+  
+  <url>
+    <loc>https://www.scottlinder.com/code/rustpn/</loc>
+  </url>
+  
+  <url>
+    <loc>https://www.scottlinder.com/tags/</loc>
+  </url>
+  
+</urlset>

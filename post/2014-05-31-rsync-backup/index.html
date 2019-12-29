@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en-us"><head>
+    <link rel="stylesheet" href="/normalize.css">
+    <link rel="stylesheet" href="/main.css">
+    <title>Rsync Backup - Scott Linder</title>
+    </head>
+<body>
+        
+        <div id="header">
+            <div class="c"><ul id="breadcrumb"><li><a href="/">~</a></li><li><a href="https://www.scottlinder.com/post/">Posts</a></li></ul><ul id="navbar">
+    
+    <li><a href="https://www.scottlinder.com/post/">Posts</a></li>
+    
+    <li><a href="https://www.scottlinder.com/talk/">Talks</a></li>
+    
+    <li><a href="https://www.scottlinder.com/code/">Code</a></li>
+    
+</ul>
+</div>
+        </div>
+        
+        <div id="content" class="c">
+<h1>Rsync Backup</h1>
+<p>You should run backups. The more backups the better. The more frequent the
+better. The more isolated the better.</p>
+<h2 id="the-setup">The Setup</h2>
+<p>With just $150 and some spare desk space you can set up a backup server. Here's
+an example setup:</p>
+<ul>
+<li><a href="http://www.element14.com/community/community/raspberry-pi">Raspberry Pi ($40)</a></li>
+<li><a href="http://www.amazon.com/Powered-7-Port-High-Speed-Adapter/dp/B005C32NMS/ref=sr_1_8?ie=UTF8&amp;qid=1401574871&amp;sr=8-8&amp;keywords=powered+usb+hub">Powered USB 2.0 Hub ($10)</a></li>
+<li><a href="http://www.amazon.com/Patuoxun-Converter-Adapter-Cable-Drive/dp/B008ASF5MC/ref=sr_1_1?ie=UTF8&amp;qid=1401574971&amp;sr=8-1&amp;keywords=sata+to+usb+2">SATA to USB 2.0 Adapter ($8)</a></li>
+<li><a href="http://www.amazon.com/WD-Green-Desktop-Hard-Drive/dp/B008YAHW6I/ref=sr_1_1?ie=UTF8&amp;qid=1401575025&amp;sr=8-1&amp;keywords=2tb+sata+drive">Any SATA HDD ($80)</a></li>
+</ul>
+<h2 id="the-backup">The Backup</h2>
+<p>If you want a simple backup, you can just run an rsync one-liner:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">rsync --progress -amzh $HOME rpi-host:<span style="color:#66d9ef">$(</span>date <span style="color:#e6db74">&#34;+%F:%T&#34;</span><span style="color:#66d9ef">)</span>
+</code></pre></div><p>(If you want to know more about what this line does, the rsync man page
+is very helpful.)</p>
+<p>This is wasteful, however, because it copies files regardless of whether they
+have been modified since the last backup. Luckily this problem is easily
+ameliorated with the help of <a href="https://en.wikipedia.org/wiki/Hard_link">hard links</a> and the <code>--link-dest</code> flag:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">CURRENT<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>date <span style="color:#e6db74">&#34;+%F:%T&#34;</span><span style="color:#66d9ef">)</span>
+rsync --progress -amzh --delete <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --link-dest<span style="color:#f92672">=</span>latest $HOME rpi-host:$CURRENT
+ssh rpi-host <span style="color:#e6db74">&lt;&lt; EOI
+</span><span style="color:#e6db74">if [ -e $CURRENT ]
+</span><span style="color:#e6db74">    # an alternative is to pass -f to ln
+</span><span style="color:#e6db74">    [ -L latest ] &amp;&amp; rm latest
+</span><span style="color:#e6db74">    ln -s $CURRENT latest
+</span><span style="color:#e6db74">else
+</span><span style="color:#e6db74">    echo &#34;[ERR] Failed to create link for backup $CURRENT&#34;
+</span><span style="color:#e6db74">EOI</span>
+</code></pre></div><p>This method is slightly more complicated: once we complete a backup we need
+to create a symbolic link to remember the root of the last backup, since we
+need to be able to tell rsync about it the next time around.</p>
+<p>This script behaves much like the &ldquo;Time Machine&rdquo; in Mac OS X: backups will only
+allocate new inodes if a file is new or has been modified. This means you can
+run backups while only using a minimal amount of storage.</p>
+<p>One caveat to this method is that even though a file may be &ldquo;backed up&rdquo; multiple
+times, if it does not change <em>it is only truley backed up once</em>. Each time the
+backup runs the same inode is referenced again. If something should go wrong
+with that file, it will effect every backup which references it. I mention this
+because there is no such thing as a free lunch: the incremental backup scheme
+saves space, but is arguably a less effective backup scheme.</p>
+<h2 id="no-excuses">No Excuses</h2>
+<p>It's cheap and easy to set up a backup server that will be invaluable when you
+experience data loss. There are many nice features that could be added to this
+script (uniquely identifying backups per-host, excluding files via rsync's
+<code>--filter</code> flag, etc.), but I'll leave these as exercises to the reader.</p>
+
+
+        </div><div id="footer" class="c">
+    <ul>
+        <li>Scott Linder</li>
+        <li>Programmer</li>
+        <li><a href="mailto:scott@scottlinder.com">scott@scottlinder.com</a></li>
+        <li><a href="https://github.com/scott-linder/">github.com/scott-linder</a></li>
+    </ul>
+    <ul>
+        <li>Built: 2019-12-29 at 5:54pm (EST)</li>
+    </ul>
+</div>
+</body>
+</html>

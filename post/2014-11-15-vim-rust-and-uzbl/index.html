@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en-us"><head>
+    <link rel="stylesheet" href="/normalize.css">
+    <link rel="stylesheet" href="/main.css">
+    <title>Vim, Rust, and Uzbl - Scott Linder</title>
+    </head>
+<body>
+        
+        <div id="header">
+            <div class="c"><ul id="breadcrumb"><li><a href="/">~</a></li><li><a href="https://www.scottlinder.com/post/">Posts</a></li></ul><ul id="navbar">
+    
+    <li><a href="https://www.scottlinder.com/post/">Posts</a></li>
+    
+    <li><a href="https://www.scottlinder.com/talk/">Talks</a></li>
+    
+    <li><a href="https://www.scottlinder.com/code/">Code</a></li>
+    
+</ul>
+</div>
+        </div>
+        
+        <div id="content" class="c">
+<h1>Vim, Rust, and Uzbl</h1>
+<p>Vim has a convenient feature called <code>keywordprg</code> which allows you to easily
+access documentation for the keyword currently under the cursor. This is
+typically set to <code>man</code>, meaning you can typically only get documentation for
+shell scripts, system calls and the C standard libraries.</p>
+<p>Rust, however, has <a href="http://doc.rust-lang.org/std/index.html">wonderful
+documentation</a> for their standard
+library as well as a few other crates shipped along with it.</p>
+<p>To marry these two seems like a great idea, and I must admit that <a href="http://damienradtke.com/vim-view-rustdoc/">someone beat
+me to the punch there</a>, but I still
+don't find this solution complete for most common browsers (e.g. Firefox,
+Chrome, etc).</p>
+<p>The problem is that a new browser window or tab will be opened for each search,
+but this usually just gets in the way. You typically want to see just the
+documentation you have most recently requested, and you always want it to show
+up in the same place. This predictability and seamless integration with your
+editor allows you to forget about the process of viewing documentation
+altogether, which is the ultimate goal.</p>
+<h1 id="enter-uzbl">Enter Uzbl</h1>
+<p><a href="http://www.uzbl.org/">Uzbl</a> is a browser based around the UNIX philosophy of
+doing one thing and doing it well, and being easily composable with other tools
+via text streams. This means that a <code>uzbl-core</code> instance is just the pure
+essence of a browser: it can navigate to a page and render it. All other
+aspects of what one might consider a modern browser are added to this core via
+(typically) python scripts.</p>
+<p>What makes this perfect for our application is that a single uzbl instance can
+be controlled by writing simple text commands to a named pipe. The script for
+<code>keywordprg</code> then becomes as simple as creating a uzbl instance if it does not
+exist, and then sending it a command to browse to the Rust documentation for
+the given keyword.</p>
+<p>This means the uzbl window will always reflect the latest request for
+documentation, without the need for opening more windows or tabs (which aren't
+supported by <code>uzbl-core</code> anyway: those are a matter of window management).</p>
+<h1 id="uzbl-browser">uzbl-browser</h1>
+<p>uzbl-core would work for our purposes, but since it does not support navigation
+it would be more complicated for the user to explore the documentation.</p>
+<p>Luckily a set of wrapper scripts around <code>uzbl-core</code>, called <code>uzbl-browser</code>, have
+already been developed. Even nicer, their default configuration very closely
+mimics Vim, with a status bar and modal approach to browsing, closing the gap
+between editing and browsing documentation even further.</p>
+<h1 id="keywordprg">keywordprg</h1>
+<p>The final script looks something like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fish" data-lang="fish"><span style="color:#75715e">#!/bin/fish
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">set</span> SEARCH_TERM $argv<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span>
+<span style="color:#66d9ef">set</span> SEARCH_URI <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">http://doc.rust-lang.org/std/?search=</span>$SEARCH_TERM<span style="color:#e6db74">&#34;</span>
+<span style="color:#66d9ef">set</span> UZBL_FIFO_VIM <span style="color:#e6db74">&#34;/tmp/uzbl_fifo_vim&#34;</span>
+
+01234567890123456789012345678901234567890123456789012345678901234567890123456789
+<span style="color:#75715e"># Direct existing uzbl instance to search uri, or spawn one if none exists.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">if</span> <span style="color:#66d9ef">test</span> -p $UZBL_FIFO_VIM
+    <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">uri </span>$SEARCH_URI<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&gt;</span> $UZBL_FIFO_VIM
+<span style="color:#66d9ef">else</span>
+    uzbl-browser -u $SEARCH_URI -n vim <span style="color:#f92672">&gt;</span>/dev/null <span style="color:#f92672">^</span><span style="color:#f92672">&amp;</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;</span>
+<span style="color:#66d9ef">end</span>
+</code></pre></div><p>This is written in <a href="http://fishshell.com/">fish shell</a>, but it could easily be
+written in any shell or scripting language. I've pushed it to a <a href="https://github.com/scott-linder/vim-rusth">GitHub
+repo</a>, and would welcome pull
+requests with versions written in other languages.</p>
+
+
+        </div><div id="footer" class="c">
+    <ul>
+        <li>Scott Linder</li>
+        <li>Programmer</li>
+        <li><a href="mailto:scott@scottlinder.com">scott@scottlinder.com</a></li>
+        <li><a href="https://github.com/scott-linder/">github.com/scott-linder</a></li>
+    </ul>
+    <ul>
+        <li>Built: 2019-12-29 at 5:54pm (EST)</li>
+    </ul>
+</div>
+</body>
+</html>
