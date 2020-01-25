@@ -25,7 +25,7 @@
 <h1>Rsync Backup</h1>
 <p>You should run backups. The more backups the better. The more frequent the
 better. The more isolated the better.</p>
-<h2 id="the-setup">The Setup</h2>
+<h2 id="the-setup-">The Setup</h2>
 <p>With just $150 and some spare desk space you can set up a backup server. Here's
 an example setup:</p>
 <ul>
@@ -34,7 +34,7 @@ an example setup:</p>
 <li><a href="http://www.amazon.com/Patuoxun-Converter-Adapter-Cable-Drive/dp/B008ASF5MC/ref=sr_1_1?ie=UTF8&amp;qid=1401574971&amp;sr=8-1&amp;keywords=sata+to+usb+2">SATA to USB 2.0 Adapter ($8)</a></li>
 <li><a href="http://www.amazon.com/WD-Green-Desktop-Hard-Drive/dp/B008YAHW6I/ref=sr_1_1?ie=UTF8&amp;qid=1401575025&amp;sr=8-1&amp;keywords=2tb+sata+drive">Any SATA HDD ($80)</a></li>
 </ul>
-<h2 id="the-backup">The Backup</h2>
+<h2 id="the-backup-">The Backup</h2>
 <p>If you want a simple backup, you can just run an rsync one-liner:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">rsync --progress -amzh $HOME rpi-host:<span style="color:#66d9ef">$(</span>date <span style="color:#e6db74">&#34;+%F:%T&#34;</span><span style="color:#66d9ef">)</span>
 </code></pre></div><p>(If you want to know more about what this line does, the rsync man page
@@ -65,7 +65,7 @@ backup runs the same inode is referenced again. If something should go wrong
 with that file, it will effect every backup which references it. I mention this
 because there is no such thing as a free lunch: the incremental backup scheme
 saves space, but is arguably a less effective backup scheme.</p>
-<h2 id="no-excuses">No Excuses</h2>
+<h2 id="no-excuses-">No Excuses</h2>
 <p>It's cheap and easy to set up a backup server that will be invaluable when you
 experience data loss. There are many nice features that could be added to this
 script (uniquely identifying backups per-host, excluding files via rsync's
@@ -80,7 +80,7 @@ script (uniquely identifying backups per-host, excluding files via rsync's
         <li><a href="https://github.com/scott-linder/">github.com/scott-linder</a></li>
     </ul>
     <ul>
-        <li>Built: 2020-01-02 at 3:45pm (EST)</li>
+        <li>Built: 2020-01-24 at 10:00pm (EST)</li>
     </ul>
 </div>
 </body>

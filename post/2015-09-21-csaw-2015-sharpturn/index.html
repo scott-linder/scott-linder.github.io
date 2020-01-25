@@ -26,7 +26,7 @@
 <p>The 400 point Forensics problem in the 2015 CSAW CTF looked lonely with only 4
 solves. It was named <code>sharpturn</code> and the description was &ldquo;I think my SATA
 controller is dying.&rdquo;</p>
-<h2 id="taking-a-look-around">Taking a look around</h2>
+<h2 id="taking-a-look-around-">Taking a look around</h2>
 <p>I downloaded and unpacked the archive, which contained a single <code>sharpturn</code>
 directory. I changed into the directory, and immediately noticed it was a bare
 git repo (it is obvious from the contents, but my shell prompt also parses <code>git status</code> if it determines I'm in a repo).</p>
@@ -79,7 +79,7 @@ gtfo
 fish: “./sharp” terminated by signal SIGFPE (Floating point exception)
 $
 </code></pre>
-<h2 id="git-schwifty">Git schwifty</h2>
+<h2 id="git-schwifty-">Git schwifty</h2>
 <p>The only hints we have so far are:</p>
 <ol>
 <li>The problem involves some sort of corruption. The description complains of a
@@ -116,7 +116,7 @@ d961f81a588fcfd5e57bbea7e17ddae8a5e61333 sharp.cpp
 354ebf392533dce06174f9c8c093036c138935f3 sharp.cpp
 </code></pre>
 <p>By some stroke of luck the SATA controller only dislikes blobs for <code>sharp.cpp</code>.</p>
-<h2 id="flipping-bits">Flipping bits</h2>
+<h2 id="flipping-bits-">Flipping bits</h2>
 <p>At this point I realized it should be as simple as modifying these blobs
 in-place until their hash actually matches their name. The only question is
 what errors are present. I assume, for the sake of the problem being tractable,
@@ -129,7 +129,7 @@ with the first and proceed from there.</p>
 <p>While looking around I note that there is one more object containing
 <code>sharp.cpp</code>: <code>efda2f556de36b9e9e1d62417c5f282d8961e2f8</code>. This is the first
 commit of the file, and is not corrupt.</p>
-<h2 id="its-getting-better">&ldquo;It's getting better!&rdquo;</h2>
+<h2 id="its-getting-better-">&ldquo;It's getting better!&rdquo;</h2>
 <p>The first corrupt blob is as follows:</p>
 <pre><code>$ git cat-file -p 354ebf392533dce06174f9c8c093036c138935f3
 #include &lt;iostream&gt;
@@ -192,7 +192,7 @@ $ rm -f .git/objects/35/4ebf392533dce06174f9c8c093036c138935f3
 $ cat sharp.cpp | git hash-object --stdin -w
 354ebf392533dce06174f9c8c093036c138935f3
 </code></pre>
-<h2 id="theres-only-two-factors-dont-let-your-calculator-lie">&ldquo;There's only two factors. Don't let your calculator lie.&rdquo;</h2>
+<h2 id="theres-only-two-factors-dont-let-your-calculator-lie-">&ldquo;There's only two factors. Don't let your calculator lie.&rdquo;</h2>
 <p>The second corrupt blob is as follows:</p>
 <pre><code>$ git cat-file -p d961f81a588fcfd5e57bbea7e17ddae8a5e61333
 #include &lt;iostream&gt;
@@ -295,7 +295,7 @@ $ rm -f .git/objects/d9/61f81a588fcfd5e57bbea7e17ddae8a5e61333
 $ cat sharp.cpp | git hash-object --stdin -w
 d961f81a588fcfd5e57bbea7e17ddae8a5e61333
 </code></pre>
-<h2 id="all-done-now-should-calculate-the-flagassuming-everything-went-okay">&ldquo;All done now! Should calculate the flag..assuming everything went okay.&rdquo;</h2>
+<h2 id="all-done-now-should-calculate-the-flagassuming-everything-went-okay-">&ldquo;All done now! Should calculate the flag..assuming everything went okay.&rdquo;</h2>
 <p>We already know the final correction.</p>
 <pre><code>$ git cat-file -p f8d0839dd728cb9a723e32058dcc386070d5e3b5 \
     | sed -e 's/51337/31337/' \
@@ -312,7 +312,7 @@ $ cat sharp.cpp | git hash-object --stdin -w
 f8d0839dd728cb9a723e32058dcc386070d5e3b5
 </code></pre>
 <p>A quick sanity check of <code>git fsck</code> returns no errors.</p>
-<h2 id="the-flag">The flag</h2>
+<h2 id="the-flag-">The flag</h2>
 <pre><code>$ make
 g++ -O2 -g -Wall -Wextra -Wshadow -std=c++11 -lcrypto -o sharp sharp.cpp
 $ ./sharp
@@ -340,7 +340,7 @@ $
         <li><a href="https://github.com/scott-linder/">github.com/scott-linder</a></li>
     </ul>
     <ul>
-        <li>Built: 2020-01-02 at 3:45pm (EST)</li>
+        <li>Built: 2020-01-24 at 10:00pm (EST)</li>
     </ul>
 </div>
 </body>
