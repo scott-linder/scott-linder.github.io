@@ -6,10 +6,18 @@
     <description>Recent content in Posts on Scott Linder</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 21 Sep 2015 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://www.scottlinder.com/post/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Tue, 15 Sep 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://www.scottlinder.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CSAW 2020 flask_caching</title>
+      <link>https://www.scottlinder.com/post/2020-09-15-csaw-2020-flask_caching/</link>
+      <pubDate>Tue, 15 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.scottlinder.com/post/2020-09-15-csaw-2020-flask_caching/</guid>
+      <description>The 300 point web problem in the 2020 CSAW CTF seems to have a reasonable number of solves, and I don&amp;rsquo;t have much time in the evening, so I think I&amp;rsquo;ll start there.
+What&amp;rsquo;s in a name? The problem comes with a single source file for a flask-based webapp, app.py, and a link to a live instance.
+Scanning the source, the following line stands out:
+redis.setex(name=title, value=content, time=3) This looks like it could represent some sort of injection vulnerability.</description>
+    </item>
     
     <item>
       <title>CSAW 2015 Sharpturn</title>
@@ -18,7 +26,7 @@
       
       <guid>https://www.scottlinder.com/post/2015-09-21-csaw-2015-sharpturn/</guid>
       <description>The 400 point Forensics problem in the 2015 CSAW CTF looked lonely with only 4 solves. It was named sharpturn and the description was &amp;ldquo;I think my SATA controller is dying.&amp;rdquo;
-Taking a look around I downloaded and unpacked the archive, which contained a single sharpturn directory. I changed into the directory, and immediately noticed it was a bare git repo (it is obvious from the contents, but my shell prompt also parses git status if it determines I&#39;m in a repo).</description>
+Taking a look around I downloaded and unpacked the archive, which contained a single sharpturn directory. I changed into the directory, and immediately noticed it was a bare git repo (it is obvious from the contents, but my shell prompt also parses git status if it determines I&amp;rsquo;m in a repo).</description>
     </item>
     
     <item>
@@ -29,7 +37,7 @@ Taking a look around I downloaded and unpacked the archive, which contained a si
       <guid>https://www.scottlinder.com/post/2014-11-15-vim-rust-and-uzbl/</guid>
       <description>Vim has a convenient feature called keywordprg which allows you to easily access documentation for the keyword currently under the cursor. This is typically set to man, meaning you can typically only get documentation for shell scripts, system calls and the C standard libraries.
 Rust, however, has wonderful documentation for their standard library as well as a few other crates shipped along with it.
-To marry these two seems like a great idea, and I must admit that someone beat me to the punch there, but I still don&#39;t find this solution complete for most common browsers (e.</description>
+To marry these two seems like a great idea, and I must admit that someone beat me to the punch there, but I still don&amp;rsquo;t find this solution complete for most common browsers (e.</description>
     </item>
     
     <item>
@@ -38,7 +46,7 @@ To marry these two seems like a great idea, and I must admit that someone beat m
       <pubDate>Sat, 02 Aug 2014 00:00:00 +0000</pubDate>
       
       <guid>https://www.scottlinder.com/post/2014-08-02-problem-with-icon-fonts/</guid>
-      <description>The Good Everyone loves icon fonts like Font Awesome. What&#39;s not to love? You can scale, color, shadow, etc. your icons right in CSS, all without sacrificing a bit of browser compatibility.
+      <description>The Good Everyone loves icon fonts like Font Awesome. What&amp;rsquo;s not to love? You can scale, color, shadow, etc. your icons right in CSS, all without sacrificing a bit of browser compatibility.
 The Bad With all these great benefits, why would there be a problem?
 The issue lies in semantics: the code points which icon fonts use are meaningless. The regions used are defined as Private Use Areas by the Unicode Consortium.</description>
     </item>
@@ -50,7 +58,7 @@ The issue lies in semantics: the code points which icon fonts use are meaningles
       
       <guid>https://www.scottlinder.com/post/2014-05-31-rsync-backup/</guid>
       <description>You should run backups. The more backups the better. The more frequent the better. The more isolated the better.
-The Setup With just $150 and some spare desk space you can set up a backup server. Here&#39;s an example setup:
+The Setup With just $150 and some spare desk space you can set up a backup server. Here&amp;rsquo;s an example setup:
  Raspberry Pi ($40) Powered USB 2.0 Hub ($10) SATA to USB 2.0 Adapter ($8) Any SATA HDD ($80)  The Backup If you want a simple backup, you can just run an rsync one-liner:</description>
     </item>
     
